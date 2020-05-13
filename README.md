@@ -70,5 +70,55 @@ add_definitions(-Wall -std=c11)
 
 
 
+To test compilation process, create a simple program:
+
+```bash
+mkdir test
+cd test
+touch main.c
+touch CMakeLists.txt
+```
+
+Inside main.c put the following:
+
+```c
+#include <stdio.h>
+
+int main (void)
+{
+
+    printf("Hello world!!!\n");
+
+    return 0;
+}
+```
+Inside CMakeLists.txt put the following:
+
+```cmake
+cmake_minimum_required(VERSION 3.0)
+add_executable(main main.c)
+```
+
+
+
+```shell
+mkdir build
+cd build
+cmake .. -DCMAKE_TOOLCHAIN_FILE=/home/roee/projects/dev_tools/cross_compile_nanopi.cmake
+make
+```
+
+This should create a main* executable inside the build directory. Running this is only possible on the nanopi, so in order to test this, copy it to the pi using:
+
+```shell
+scp main username@IP.OF.THE.PI:~
+```
+
+
+
+Running the file from inside the pi using `./main` should print `Hello world!!!`.
+
+
+
 
 
